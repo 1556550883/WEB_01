@@ -7,8 +7,6 @@ import org.apache.commons.logging.LogFactory;
 
 import com.ruanyun.web.model.AppCommonModel;
 
-import net.sf.json.JSONObject;
-
 public class DYDChannel extends BaseChannel
 {
 	private static final String CLICK_ID = "qisu";
@@ -29,11 +27,13 @@ public class DYDChannel extends BaseChannel
 		
 		if(code == 200)
 		{
+			log.error("request url：" + url + "。response：" + code);
 			model.setResult(1);
 			model.setMsg("通过渠道验证！");
 		}
 		else
 		{
+			log.error("request url：" + url + "。response：" + code);
 			model.setResult(-1);
 			model.setMsg("领取任务失败。原因：点击渠道未通过！");
 		}

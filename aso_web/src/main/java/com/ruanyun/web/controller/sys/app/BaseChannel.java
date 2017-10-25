@@ -72,7 +72,6 @@ public abstract class BaseChannel
     public static int httpGet(String url)
     {
         DefaultHttpClient httpClient = new DefaultHttpClient();
-        JSONObject jsonResult = null;
         int result = 0;
         HttpGet httpGet = new HttpGet(url);
         try 
