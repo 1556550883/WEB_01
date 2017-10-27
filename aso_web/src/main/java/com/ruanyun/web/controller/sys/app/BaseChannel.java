@@ -18,7 +18,7 @@ public abstract class BaseChannel
 	 * 获取回调地址
 	 */
 	public static String getCallbackUrl(String adid, String idfa, Integer userAppId, Integer adverId, String userNum) throws UnsupportedEncodingException{
-		StringBuilder callback = new StringBuilder("http://116.62.103.139:8080/sjjz/app/duijie/callback")
+		StringBuilder callback = new StringBuilder("http://116.62.239.243:8080/sjjz/app/duijie/callback")
 				.append("?adid=").append(adid)
 				.append("&idfa=").append(idfa)
 				.append("&userAppId=").append(userAppId)
