@@ -14,6 +14,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -23,10 +24,10 @@ import com.ruanyun.common.utils.EmptyUtils;
 import com.ruanyun.web.dao.sys.background.ChannelAdverInfoDao;
 import com.ruanyun.web.model.TChannelAdverInfo;
 import com.ruanyun.web.model.sys.TUser;
+import com.ruanyun.web.model.sys.UploadVo;
 import com.ruanyun.web.util.Constants;
 import com.ruanyun.web.util.NumUtils;
 import com.ruanyun.web.util.UploadCommon;
-import com.ruanyun.web.model.sys.UploadVo;
 
 /**
  *@author feiyang
@@ -197,5 +198,15 @@ public class ChannelAdverInfoService extends BaseServiceImpl<TChannelAdverInfo>
 	public int getCountComplete(String adverId) 
 	{
 		return channelAdverInfoDao.getCountComplete(adverId);
+	}
+	
+	/*
+	 * CREATE TABLE 新表
+	 *SELECT * FROM 旧表 
+	 */
+	@Transactional
+	public void adverInfoTableBak() 
+	{
+		channelAdverInfoDao.adverInfoTableBak();
 	}
 }
