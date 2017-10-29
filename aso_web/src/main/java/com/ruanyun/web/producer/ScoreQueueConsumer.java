@@ -13,27 +13,28 @@ import com.ruanyun.web.service.background.UserScoreService;
 
 public class ScoreQueueConsumer extends EndPoint implements  Runnable
 {
-	public static ExecutorService pool = Executors.newCachedThreadPool(); 
+	public static ExecutorService pool = Executors.newFixedThreadPool(1); 
 	private UserScoreService userScoreService;
-	private static QueueProducer scoreQueue;
 	public ScoreQueueConsumer(String endpointName, UserScoreService userScoreService) throws IOException, TimeoutException 
 	{
 		super(endpointName);
 		this.userScoreService = userScoreService;
 	}
 
-	public static QueueProducer getQueueProducer() throws IOException, TimeoutException 
-	{
-		if(scoreQueue == null) 
-		{
-			scoreQueue = new QueueProducer("socre");
-		}
-		return scoreQueue;
-	}
-	
 	@Override
 	public void run()
 	{
+		int prefetchCount = 1;  
+	    
+		try 
+	    {
+			channel.basicQos(prefetchCount);
+		}
+	    catch (IOException e2) 
+	    {
+			e2.printStackTrace();
+		} 
+	    
 		QueueingConsumer consumer = new QueueingConsumer(channel);  
 		try
 		{
